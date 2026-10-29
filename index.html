@@ -1,0 +1,612 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>PMO Documentation Framework</title>
+<meta name="description" content="Master PMO Documentation Register and free predictive project management templates aligned to the PMBOK Guide - Eighth Edition.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..100,500..800&family=Source+Sans+3:wght@400;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: document-register portal - masthead band, sticky section tabs, wide data views with a slide-in record drawer */
+:root{
+  --navy:#1F3A5F; --teal:#13807E; --teal-ink:#0E6664;
+  --bg:#F5F7FA; --surface:#FFFFFF; --sunk:#EBF0F5; --line:#D3DCE6; --line-strong:#B8C4D0;
+  --fg:#1E2A36; --muted:#5D6B7A; --band:#1F3A5F; --band-fg:#FFFFFF; --band-muted:#B9CCE0;
+  --m-bg:#1F3A5F; --m-fg:#FFFFFF; --c-bg:#FCEFC7; --c-fg:#7A5600; --o-bg:#E4E9EF; --o-fg:#56636F;
+  --green:#2E8B57; --green-l:#D5EFDF; --amber:#B37F00; --amber-l:#FCEFC7; --red:#C0392B; --red-l:#F6D5D1;
+  --focus:#13807E; --shadow:0 10px 40px rgba(20,40,70,.18);
+  --f-display:"Archivo","Arial Narrow",Arial,sans-serif;
+  --f-body:"Source Sans 3","Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --navy:#9CC3EA; --teal:#3FB8B4; --teal-ink:#5CCBC7;
+  --bg:#0F1720; --surface:#16212D; --sunk:#1C2937; --line:#2A3A4B; --line-strong:#3A4D61;
+  --fg:#E3EAF1; --muted:#97A6B6; --band:#132538; --band-fg:#F1F5F9; --band-muted:#8FA9C4;
+  --m-bg:#9CC3EA; --m-fg:#0F1720; --c-bg:#4A3B10; --c-fg:#F2D27A; --o-bg:#26333F; --o-fg:#A7B4C1;
+  --green:#5CC98A; --green-l:#163626; --amber:#E8B84A; --amber-l:#3D3112; --red:#F07B6E; --red-l:#3E1C19;
+  --focus:#3FB8B4; --shadow:0 10px 40px rgba(0,0,0,.5); color-scheme:dark}}
+:root[data-theme="dark"]{
+  --navy:#9CC3EA; --teal:#3FB8B4; --teal-ink:#5CCBC7;
+  --bg:#0F1720; --surface:#16212D; --sunk:#1C2937; --line:#2A3A4B; --line-strong:#3A4D61;
+  --fg:#E3EAF1; --muted:#97A6B6; --band:#132538; --band-fg:#F1F5F9; --band-muted:#8FA9C4;
+  --m-bg:#9CC3EA; --m-fg:#0F1720; --c-bg:#4A3B10; --c-fg:#F2D27A; --o-bg:#26333F; --o-fg:#A7B4C1;
+  --green:#5CC98A; --green-l:#163626; --amber:#E8B84A; --amber-l:#3D3112; --red:#F07B6E; --red-l:#3E1C19;
+  --focus:#3FB8B4; --shadow:0 10px 40px rgba(0,0,0,.5); color-scheme:dark}
+
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{background:var(--bg);color:var(--fg);font:16px/1.5 var(--f-body);-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:30;background:var(--band)}
+.wrap{max-width:1280px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+h1,h2,h3{font-family:var(--f-display);font-stretch:85%;text-wrap:balance;margin:0;line-height:1.15}
+h2{font-size:1.65rem;font-weight:750;color:var(--navy)}
+h3{font-size:1.1rem;font-weight:700;color:var(--fg)}
+p{margin:0}
+.mono{font-family:var(--f-mono);font-size:.82em;letter-spacing:-.01em}
+.eyebrow{font:600 .72rem/1 var(--f-body);letter-spacing:.12em;text-transform:uppercase;color:var(--teal)}
+.muted{color:var(--muted)}
+a{color:var(--teal-ink)}
+button{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--focus);outline-offset:2px;border-radius:4px}
+
+/* masthead */
+.mast{background:var(--band);color:var(--band-fg)}
+.mast .wrap{padding-block:28px 22px;display:grid;gap:18px;grid-template-columns:minmax(0,1fr) auto;align-items:end}
+.mast .eyebrow{color:#7FD3CF}
+.mast h1{font-size:clamp(1.8rem,4vw,2.8rem);font-weight:800;margin-top:8px;letter-spacing:-.01em}
+.mast .sub{color:var(--band-muted);margin-top:6px;max-width:62ch}
+.idplate{border:1px solid rgba(255,255,255,.22);border-radius:6px;padding:10px 14px;display:grid;grid-template-columns:auto auto;gap:3px 14px;font-size:.8rem}
+.idplate dt{color:var(--band-muted);text-transform:uppercase;letter-spacing:.08em;font-size:.68rem;align-self:center}
+.idplate dd{margin:0;font-family:var(--f-mono);font-size:.78rem}
+@media (max-width:760px){.mast .wrap{grid-template-columns:1fr}}
+
+/* tabs */
+.tabs{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--surface);border-bottom:1px solid var(--line)}
+.tabs .wrap{display:flex;gap:4px;align-items:center;overflow-x:auto;scrollbar-width:none}
+.tabs a{flex:none;text-decoration:none;color:var(--muted);font-weight:600;font-size:.92rem;padding:13px 12px 11px;border-bottom:3px solid transparent}
+.tabs a:hover{color:var(--fg)}
+.tabs a[aria-current="page"]{color:var(--navy);border-bottom-color:var(--teal)}
+.tabs .spacer{flex:1 0 12px}
+.cx{flex:none;display:flex;align-items:center;gap:8px;font-size:.8rem;color:var(--muted);padding-block:6px}
+.seg{display:inline-flex;border:1px solid var(--line-strong);border-radius:6px;overflow:hidden}
+.seg button{border:0;background:transparent;padding:5px 10px;font-size:.8rem;font-weight:600;cursor:pointer;color:var(--muted)}
+.seg button[aria-pressed="true"]{background:var(--navy);color:var(--bg)}
+
+main{padding-block:28px 64px}
+section.view{display:grid;gap:24px}
+.lead{max-width:70ch;color:var(--muted);font-size:1.02rem}
+.head{display:grid;gap:8px}
+
+/* chips */
+.cls{display:inline-flex;align-items:center;justify-content:center;min-width:1.7em;height:1.6em;padding:0 .45em;border-radius:4px;font:700 .75rem/1 var(--f-body);letter-spacing:.03em}
+.cls.M{background:var(--m-bg);color:var(--m-fg)} .cls.C{background:var(--c-bg);color:var(--c-fg)} .cls.O{background:var(--o-bg);color:var(--o-fg)}
+.cls.wide{padding:0 .6em}
+.dchip{display:inline-block;font-size:.74rem;font-weight:600;padding:2px 7px;border-radius:999px;border:1px solid var(--line-strong);color:var(--muted);white-space:nowrap}
+.ref{display:inline-flex;align-items:center;gap:4px;font-family:var(--f-mono);font-size:.74rem;padding:2px 6px;border-radius:4px;background:var(--sunk);color:var(--fg);border:1px solid var(--line);cursor:pointer;text-decoration:none}
+.ref:hover{border-color:var(--teal);color:var(--teal-ink)}
+.refs{display:flex;flex-wrap:wrap;gap:4px}
+
+/* overview */
+.stack{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));border:1px solid var(--line);border-radius:8px;overflow:hidden;background:var(--surface)}
+.stack > div{padding:16px;border-right:1px solid var(--line);display:grid;gap:8px;align-content:start;min-width:0}
+.stack > div:last-child{border-right:0}
+.stack .n{font:800 2.2rem/1 var(--f-display);font-stretch:80%;color:var(--navy)}
+.stack ul{margin:0;padding:0;list-style:none;font-size:.86rem;color:var(--muted);display:grid;gap:2px}
+@media (max-width:900px){.stack{grid-template-columns:1fr 1fr}.stack>div{border-bottom:1px solid var(--line)}}
+@media (max-width:480px){.stack{grid-template-columns:1fr}}
+.tally{display:flex;gap:12px;flex-wrap:wrap}
+.tally .t{display:flex;align-items:center;gap:10px;background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:12px 16px;min-width:0}
+.tally .t b{font:800 1.8rem/1 var(--f-display);font-stretch:80%;font-variant-numeric:tabular-nums}
+.steps{counter-reset:s;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin:0;padding:0;list-style:none}
+.steps li{counter-increment:s;background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:14px 16px;display:grid;gap:6px;font-size:.92rem;min-width:0}
+.steps li::before{content:counter(s,decimal-leading-zero);font:700 .8rem var(--f-mono);color:var(--teal)}
+.two{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:18px;display:grid;gap:12px;align-content:start;min-width:0}
+
+/* register */
+.filters{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.filters input,.filters select{font:inherit;font-size:.9rem;padding:7px 10px;border:1px solid var(--line-strong);border-radius:6px;background:var(--surface);color:var(--fg);min-width:0}
+.filters input{flex:1 1 220px}
+.dfilter{display:flex;flex-wrap:wrap;gap:6px}
+.dfilter button{border:1px solid var(--line-strong);background:var(--surface);border-radius:999px;padding:4px 11px;font-size:.8rem;font-weight:600;color:var(--muted);cursor:pointer}
+.dfilter button[aria-pressed="true"]{background:var(--teal);border-color:var(--teal);color:var(--surface)}
+.tablebox{overflow-x:auto;border:1px solid var(--line);border-radius:8px;background:var(--surface)}
+table{border-collapse:collapse;width:100%;font-size:.86rem}
+th{font:600 .7rem/1.2 var(--f-body);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);text-align:left;padding:10px 12px;border-bottom:1px solid var(--line-strong);background:var(--sunk);white-space:nowrap;position:sticky;top:0}
+td{padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+tbody tr:last-child td{border-bottom:0}
+.reg tbody tr{cursor:pointer}
+.reg tbody tr:hover td{background:var(--sunk)}
+.reg td.t{min-width:220px}
+.reg td.t b{display:block;font-weight:700;color:var(--fg)}
+.reg .num{font:700 .8rem var(--f-mono);color:var(--teal)}
+.count{font-size:.85rem;color:var(--muted)}
+.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:.82rem;color:var(--muted);align-items:center}
+.legend span{display:inline-flex;gap:6px;align-items:center}
+
+/* lifecycle grid */
+.lc{display:grid;grid-template-columns:150px repeat(5,minmax(150px,1fr));min-width:920px}
+.lc > div{border-right:1px solid var(--line);border-bottom:1px solid var(--line);padding:10px;min-width:0}
+.lc .hd{background:var(--sunk);font:600 .72rem/1.2 var(--f-body);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);display:flex;justify-content:space-between;gap:6px}
+.lc .hd .g{font-family:var(--f-mono);color:var(--teal);letter-spacing:0}
+.lc .dm{font:700 .95rem var(--f-display);font-stretch:85%;color:var(--navy);background:var(--sunk)}
+.lc .cell{display:flex;flex-direction:column;gap:5px}
+.pill{display:flex;gap:6px;align-items:baseline;font-size:.78rem;line-height:1.25;padding:5px 7px;border-radius:5px;border:1px solid var(--line-strong);background:transparent;cursor:pointer;text-align:left;width:100%}
+.pill .mono{color:var(--teal);font-weight:500}
+.pill.created{background:var(--navy);border-color:var(--navy);color:var(--bg)}
+.pill.created .mono{color:var(--bg);opacity:.8}
+.pill.dim{opacity:.35}
+.gates{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px}
+.gate{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:16px;display:grid;gap:10px;align-content:start}
+.gate .gid{font:800 1.6rem/1 var(--f-display);font-stretch:80%;color:var(--teal)}
+.gate ul{margin:0;padding:0;list-style:none;display:grid;gap:4px;font-size:.84rem}
+.gate li{display:flex;gap:8px;align-items:baseline}
+.gate li .mono{color:var(--muted)}
+
+/* flow */
+.flow{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr) minmax(0,1fr);gap:16px;align-items:start}
+@media (max-width:820px){.flow{grid-template-columns:1fr}}
+.flowcol{display:grid;gap:8px}
+.flowcol h3{font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-family:var(--f-body)}
+.fnode{display:flex;gap:10px;align-items:center;background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:9px 12px;cursor:pointer;text-align:left;width:100%;font-size:.88rem}
+.fnode:hover{border-color:var(--teal)}
+.fnode .mono{color:var(--teal);font-weight:500}
+.focusnode{background:var(--navy);color:var(--bg);border-radius:8px;padding:18px;display:grid;gap:8px}
+.focusnode .eyebrow{color:var(--bg);opacity:.75}
+.focusnode h3{color:var(--bg);font-size:1.35rem}
+.focusnode select{font:inherit;font-size:.88rem;padding:6px 8px;border-radius:6px;border:0;background:var(--surface);color:var(--fg);max-width:100%}
+.matrix{border-collapse:separate;border-spacing:0;font-size:.74rem}
+.matrix th,.matrix td{padding:0;border:0}
+.matrix th.c{writing-mode:vertical-rl;transform:rotate(180deg);height:46px;width:26px;font:500 .72rem var(--f-mono);color:var(--muted);text-transform:none;letter-spacing:0;background:transparent;border:0;text-align:left;padding:4px 0}
+.matrix th.r{font:500 .74rem var(--f-body);text-transform:none;letter-spacing:0;color:var(--fg);background:transparent;padding:0 10px 0 0;white-space:nowrap;text-align:right;position:sticky;left:0;background:var(--surface);border:0}
+.matrix td{width:26px;height:24px;text-align:center;border-right:1px solid var(--line);border-bottom:1px solid var(--line)}
+.matrix td.on{background:var(--teal)}
+.matrix td.self{background:var(--sunk)}
+.matrix tr.hl th.r{color:var(--teal-ink);font-weight:700}
+.matrix tr.hl td{box-shadow:inset 0 2px 0 var(--teal),inset 0 -2px 0 var(--teal)}
+.matrix td.colhl{background-image:linear-gradient(var(--sunk),var(--sunk))}
+.matrix td.on.colhl{background-image:none}
+
+/* controls */
+.cc{display:flex;flex-wrap:wrap;gap:0;border:1px solid var(--line);border-radius:8px;overflow:hidden;background:var(--surface)}
+.cc > div{flex:1 1 150px;padding:14px;border-right:1px solid var(--line);display:grid;gap:6px;align-content:start;position:relative;min-width:0}
+.cc > div:last-child{border-right:0}
+.cc .k{font:700 .78rem var(--f-mono);color:var(--teal)}
+.cc b{font-size:.92rem}
+.cc p{font-size:.82rem;color:var(--muted)}
+.rag td.g{background:var(--green-l);color:var(--fg)} .rag td.a{background:var(--amber-l);color:var(--fg)} .rag td.r{background:var(--red-l);color:var(--fg)}
+.ragh{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:6px;vertical-align:baseline}
+.cat td:first-child{font-weight:700;white-space:nowrap}
+
+/* library */
+.libtop{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between}
+.btn{text-decoration:none;display:inline-flex;align-items:center;gap:8px;border:1px solid var(--navy);background:var(--navy);color:var(--bg);padding:8px 14px;border-radius:6px;font-weight:600;font-size:.88rem;cursor:pointer}
+.btn.ghost{background:transparent;color:var(--navy)}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.btn.sm{padding:5px 10px;font-size:.8rem}
+.libgroup{display:grid;gap:10px}
+.libgroup h3{display:flex;gap:10px;align-items:baseline}
+.libgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:10px}
+.file{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:12px 14px;display:grid;grid-template-columns:auto minmax(0,1fr);gap:4px 12px;align-items:center}
+.ext{grid-row:span 2;width:44px;height:52px;border-radius:4px 12px 4px 4px;display:grid;place-items:center;font:700 .66rem var(--f-mono);letter-spacing:.04em;color:#fff;text-transform:uppercase}
+.ext.docx{background:#2B579A}.ext.xlsx{background:#217346}.ext.pptx{background:#C4502E}
+.file .nm{font-weight:600;font-size:.9rem;line-height:1.25;cursor:pointer}
+.file .nm:hover{color:var(--teal-ink)}
+.file .meta{display:flex;gap:8px;align-items:center;flex-wrap:wrap;font-size:.76rem;color:var(--muted)}
+.file .act{grid-column:1/-1;display:flex;gap:8px;justify-content:flex-end;margin-top:6px}
+.note{font-size:.84rem;color:var(--muted);background:var(--sunk);border-radius:6px;padding:10px 12px}
+.toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(20px + env(safe-area-inset-bottom,0px));background:var(--fg);color:var(--bg);padding:10px 16px;border-radius:6px;font-size:.88rem;z-index:60;max-width:calc(100% - 32px)}
+
+/* drawer */
+.scrim{position:fixed;inset:0;background:rgba(10,20,30,.45);z-index:40}
+.drawer{position:fixed;top:0;right:0;bottom:0;width:min(560px,100%);background:var(--surface);z-index:50;box-shadow:var(--shadow);display:flex;flex-direction:column;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);padding-right:env(safe-area-inset-right,0px)}
+.dhead{background:var(--band);color:var(--band-fg);padding:18px 20px;display:grid;gap:6px}
+.dhead .row{display:flex;justify-content:space-between;gap:10px;align-items:start}
+.dhead h2{color:var(--band-fg);font-size:1.5rem}
+.dhead .mono{color:var(--band-muted)}
+.x{border:1px solid rgba(255,255,255,.3);background:transparent;color:var(--band-fg);border-radius:6px;padding:4px 10px;cursor:pointer;flex:none}
+.dbody{overflow-y:auto;padding:18px 20px 28px;display:grid;gap:18px;align-content:start}
+.kv{display:grid;grid-template-columns:130px minmax(0,1fr);gap:7px 14px;font-size:.9rem;margin:0}
+.kv dt{color:var(--muted);font-size:.74rem;letter-spacing:.06em;text-transform:uppercase;padding-top:3px}
+.kv dd{margin:0}
+.dsec{display:grid;gap:8px}
+.dsec > .eyebrow{border-bottom:1px solid var(--line);padding-bottom:6px}
+.tl{display:flex;gap:6px;align-items:center;flex-wrap:wrap;font-size:.84rem}
+.checks{margin:0;padding:0;list-style:none;display:grid;gap:6px;font-size:.9rem}
+.checks li{display:grid;grid-template-columns:18px minmax(0,1fr);gap:8px}
+.checks li::before{content:"";width:12px;height:12px;border:2px solid var(--teal);border-radius:3px;margin-top:4px}
+.rule{font-size:.86rem;color:var(--muted);border-left:3px solid var(--teal);padding-left:10px}
+@media (max-width:480px){.kv{grid-template-columns:1fr}.kv dt{padding-top:6px}}
+@media (prefers-reduced-motion:no-preference){.drawer{animation:slide .22s ease-out}@keyframes slide{from{transform:translateX(24px);opacity:.6}}}
+</style>
+<style>:root{padding-top:env(safe-area-inset-top);padding-bottom:env(safe-area-inset-bottom)}body{margin:0}img{max-width:100%}</style>
+</head>
+<body>
+
+
+
+
+
+
+<header class="mast">
+  <div class="wrap">
+    <div>
+      <div class="eyebrow">PMO governance framework &middot; PMBOK&reg; Guide &ndash; Eighth Edition &middot; Predictive</div>
+      <h1>PMO Documentation Framework</h1>
+      <p class="sub">The Master Document Register above the 25 toolkit artefacts: what is mandatory, conditional or optional, when each is created and baselined, who owns and approves it, and how the artefacts feed one another.</p>
+    </div>
+    <dl class="idplate" id="idplate"></dl>
+  </div>
+</header>
+
+<nav class="tabs" aria-label="Sections">
+  <div class="wrap" id="tabs">
+    <a href="#overview">Overview</a>
+    <a href="#register">Document Register</a>
+    <a href="#lifecycle">Lifecycle &amp; Gates</a>
+    <a href="#flow">Information Flow</a>
+    <a href="#controls">Governance Controls</a>
+    <a href="#standards">Standards &amp; Terms</a>
+    <a href="#library">Document Library</a>
+    <span class="spacer"></span>
+    <div class="cx"><span>Project complexity</span><div class="seg" id="cxseg" role="group" aria-label="Project complexity">
+      <button type="button" data-cx="Low">Low</button><button type="button" data-cx="Medium">Medium</button><button type="button" data-cx="High">High</button></div></div>
+  </div>
+</nav>
+
+<main class="wrap">
+  <section class="view" id="v-overview"></section>
+  <section class="view" id="v-register" hidden></section>
+  <section class="view" id="v-lifecycle" hidden></section>
+  <section class="view" id="v-flow" hidden></section>
+  <section class="view" id="v-controls" hidden></section>
+  <section class="view" id="v-standards" hidden></section>
+  <section class="view" id="v-library" hidden></section>
+</main>
+
+<div class="scrim" id="scrim" hidden></div>
+<aside class="drawer" id="drawer" hidden aria-modal="true" role="dialog" aria-labelledby="dtitle"></aside>
+<div class="toast" id="toast" hidden></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+<script id="fw-data" type="application/json">{"project": {"org": "[Organization Name]", "name": "[Project Name]", "id": "PRJ-2026-001", "sponsor": "[Project Sponsor]", "pm": "[Project Manager]", "pmo": "[PMO / Portfolio]", "business_unit": "[Business Unit]", "start": "2026-11-02", "finish": "2027-10-29", "currency": "CAD", "approach": "Predictive (plan-driven)", "classification": "Internal"}, "version": "0.1", "status": "Draft", "artefacts": [{"no": "01", "title": "Project Charter", "code": "CHR", "id": "PRJ-2026-001-CHR", "ext": "docx", "domains": ["Governance"], "focus": ["Initiating"], "cat": "AUTH", "catName": "Authorizing document", "catRule": "Approved once at G1. Changes to objectives, budget envelope or PM authority require a Sponsor-approved CR and a major version.", "tailor": {"Low": "M", "Medium": "M", "High": "M"}, "cls": "Mandatory", "cond": "", "created": "Initiating", "gate": "G1", "trigger": "Approved business case / project request", "owner": "Project Manager", "approver": "Project Sponsor", "consulted": "PMO, Finance, key stakeholders", "baseline": "Approved at G1 (v1.0)", "cadence": "Revisit at each gate; change only via CR", "feeds": ["02", "03", "04", "06", "08", "10", "13", "15", "18", "25"], "fedBy": [], "accept": ["Signed by the Project Sponsor (G1 record)", "Every objective is SMART with metric, target and measurement source", "In-scope and out-of-scope items each listed explicitly", "Summary budget states estimate class and accuracy range", "PM authority and tolerances quantified (budget, schedule, staffing)"]}, {"no": "02", "title": "Integrated Project Management Plan", "code": "PMP", "id": "PRJ-2026-001-PMP", "ext": "docx", "domains": ["Governance"], "focus": ["Planning", "Monitoring & Controlling"], "cat": "PLAN", "catName": "Controlled management plan", "catRule": "Approved at G2 with the Integrated PMP. Minor edits = 1.x (PM); changes to process, thresholds or authority = major version via CR.", "tailor": {"Low": "M", "Medium": "M", "High": "M"}, "cls": "Mandatory", "cond": "", "created": "Planning", "gate": "G2", "trigger": "Charter approved", "owner": "Project Manager", "approver": "Project Sponsor / Steering Committee", "consulted": "Workstream leads, PMO, Finance", "baseline": "v1.0 at G2 — integrates all baselines", "cadence": "Review at each gate; update via change control", "feeds": ["12", "19", "20", "21", "22", "23", "24", "25"], "fedBy": ["01", "03", "06", "08", "11", "12", "13", "14", "15", "17", "18"], "accept": ["Every subsidiary plan and baseline listed with Document ID and version", "Tailoring decision recorded for each of the 7 performance domains", "Change-authority thresholds stated in time and money", "RAG thresholds quantified for schedule, cost, scope, risk and quality", "Gates G1–G5 defined with approver and exit criteria"]}, {"no": "03", "title": "Scope Management Plan", "code": "SCP", "id": "PRJ-2026-001-SCP", "ext": "docx", "domains": ["Scope"], "focus": ["Planning"], "cat": "PLAN", "catName": "Controlled management plan", "catRule": "Approved at G2 with the Integrated PMP. Minor edits = 1.x (PM); changes to process, thresholds or authority = major version via CR.", "tailor": {"Low": "C", "Medium": "M", "High": "M"}, "cls": "Mandatory", "cond": "Low complexity: may be a section of the Integrated PMP (02).", "created": "Planning", "gate": "G2", "trigger": "Charter approved", "owner": "Project Manager", "approver": "Project Sponsor", "consulted": "Business Owner, Business Analyst", "baseline": "Scope statement baselined at G2 (scope baseline)", "cadence": "Review at each gate", "feeds": ["02", "04", "05", "17"], "fedBy": ["01"], "accept": ["Scope statement includes deliverables, acceptance criteria, exclusions, constraints and assumptions", "WBS rules defined (100% rule, numbering, work-package size)", "Deliverable acceptance procedure names acceptor and review period", "Scope variance threshold defined"]}, {"no": "04", "title": "Requirements & RTM", "code": "RTM", "id": "PRJ-2026-001-RTM", "ext": "xlsx", "domains": ["Scope"], "focus": ["Planning", "Monitoring & Controlling"], "cat": "LIVE", "catName": "Living register / log", "catRule": "Not baselined. Maintained continuously at the defined cadence; snapshot captured at each gate; version increments on each formal issue.", "tailor": {"Low": "C", "Medium": "M", "High": "M"}, "cls": "Mandatory", "cond": "Low complexity: a requirements list in the Charter may suffice.", "created": "Planning", "gate": "G2", "trigger": "Scope Management Plan drafted", "owner": "Business Analyst", "approver": "Business Owner", "consulted": "Stakeholders, QA Lead, Technical Lead", "baseline": "Requirements baseline approved at G2; changes via CR", "cadence": "Weekly during analysis/build; at each test cycle", "feeds": ["05", "17", "22", "25"], "fedBy": ["01", "03", "10"], "accept": ["100% of requirements uniquely identified with a source", "100% of 'Must' requirements have testable acceptance criteria", "Traceability ≥ 95% (WBS, deliverable, test) by G3; 100% verified by G4", "Status of each requirement current at each gate"]}, {"no": "05", "title": "WBS & WBS Dictionary", "code": "WBS", "id": "PRJ-2026-001-WBS", "ext": "xlsx", "domains": ["Scope"], "focus": ["Planning"], "cat": "BASE", "catName": "Baseline component", "catRule": "Frozen at G2 as part of the performance measurement baseline. Changed only through an approved CR; re-issue as a major version (2.0, 3.0...).", "tailor": {"Low": "M", "Medium": "M", "High": "M"}, "cls": "Mandatory", "cond": "", "created": "Planning", "gate": "G2", "trigger": "Scope statement and requirements approved", "owner": "Project Manager", "approver": "Project Sponsor", "consulted": "Workstream leads", "baseline": "Scope baseline at G2 (with 03 scope statement)", "cadence": "Change only via approved CR", "feeds": ["07", "09", "13", "14", "16"], "fedBy": ["03", "04"], "accept": ["100% rule satisfied: all and only the project scope", "Every work package has one accountable owner and a dictionary entry", "Work packages sized to 8–80 h or one reporting period", "Each work package mapped to a control account"]}, {"no": "06", "title": "Schedule Management Plan", "code": "SMP", "id": "PRJ-2026-001-SMP", "ext": "docx", "domains": ["Schedule"], "focus": ["Planning"], "cat": "PLAN", "catName": "Controlled management plan", "catRule": "Approved at G2 with the Integrated PMP. Minor edits = 1.x (PM); changes to process, thresholds or authority = major version via CR.", "tailor": {"Low": "C", "Medium": "M", "High": "M"}, "cls": "Mandatory", "cond": "Low complexity: may be a section of the Integrated PMP (02).", "created": "Planning", "gate": "G2", "trigger": "Charter approved", "owner": "Project Manager", "approver": "Project Sponsor", "consulted": "PMO / scheduler", "baseline": "Approved at G2 with the PMP", "cadence": "Review at each gate", "feeds": ["02", "07", "22"], "fedBy": ["01"], "accept": ["Scheduling method, tool, calendar and units stated", "Progress-measurement rules defined (0/100, 50/50, weighted)", "Schedule variance thresholds quantified (days and SPI)", "Re-baselining rule tied to change control"]}, {"no": "07", "title": "Master Schedule", "code": "MSC", "id": "PRJ-2026-001-MSC", "ext": "xlsx", "domains": ["Schedule"], "focus": ["Planning", "Monitoring & Controlling"], "cat": "BASE", "catName": "Baseline component", "catRule": "Frozen at G2 as part of the performance measurement baseline. Changed only through an approved CR; re-issue as a major version (2.0, 3.0...).", "tailor": {"Low": "M", "Medium": "M", "High": "M"}, "cls": "Mandatory", "cond": "", "created": "Planning", "gate": "G2", "trigger": "WBS approved", "owner": "Project Manager", "approver": "Project Sponsor", "consulted": "Work package owners", "baseline": "Schedule baseline at G2", "cadence": "Status updated weekly; baseline changed only via CR", "feeds": ["09", "13", "22", "25"], "fedBy": ["05", "06", "13", "16", "18"], "accept": ["Every activity linked to a WBS ID", "No open ends: every activity has a predecessor and a successor (except start/finish)", "Gate milestones G1–G5 present with zero duration", "Baseline dates captured and frozen at G2"]}, {"no": "08", "title": "Financial Management Plan", "code": "FMP", "id": "PRJ-2026-001-FMP", "ext": "docx", "domains": ["Finance"], "focus": ["Planning"], "cat": "PLAN", "catName": "Controlled management plan", "catRule": "Approved at G2 with the Integrated PMP. Minor edits = 1.x (PM); changes to process, thresholds or authority = major version via CR.", "tailor": {"Low": "C", "Medium": "M", "High": "M"}, "cls": "Mandatory", "cond": "Low complexity: may be a section of the Integrated PMP (02).", "created": "Planning", "gate": "G2", "trigger": "Charter approved", "owner": "Project Manager", "approver": "Project Sponsor", "consulted": "Finance Business Partner", "baseline": "Approved at G2 with the PMP", "cadence": "Review quarterly and at each gate", "feeds": ["02", "09", "18", "22"], "fedBy": ["01", "15"], "accept": ["Estimate classes and accuracy ranges defined", "Contingency and management reserve basis and release authority defined", "Spending authority stated per role with monetary limits", "EVM formulas and reporting cadence stated"]}, {"no": "09", "title": "Project Budget", "code": "BUD", "id": "PRJ-2026-001-BUD", "ext": "xlsx", "domains": ["Finance"], "focus": ["Planning", "Monitoring & Controlling"], "cat": "BASE", "catName": "Baseline component", "catRule": "Frozen at G2 as part of the performance measurement baseline. Changed only through an approved CR; re-issue as a major version (2.0, 3.0...).", "tailor": {"Low": "M", "Medium": "M", "High": "M"}, "cls": "Mandatory", "cond": "", "created": "Planning", "gate": "G2", "trigger": "WBS and schedule drafted", "owner": "Project Manager", "approver": "Project Sponsor", "consulted": "Finance, Procurement", "baseline": "Cost baseline at G2 (excl. management reserve)", "cadence": "Actuals monthly; baseline changed only via CR", "feeds": ["22", "25"], "fedBy": ["05", "07", "08", "13", "15", "16", "18"], "accept": ["Bottom-up estimate by work package; sum equals cost baseline", "Contingency traceable to Risk Register EMV", "Time-phased Planned Value equals the cost baseline", "CPI, SPI and EAC reported each month"]}, {"no": "10", "title": "Stakeholder Register", "code": "SHR", "id": "PRJ-2026-001-SHR", "ext": "xlsx", "domains": ["Stakeholders"], "focus": ["Initiating", "Planning"], "cat": "LIVE", "catName": "Living register / log", "catRule": "Not baselined. Maintained continuously at the defined cadence; snapshot captured at each gate; version increments on each formal issue.", "tailor": {"Low": "M", "Medium": "M", "High": "M"}, "cls": "Mandatory", "cond": "", "created": "Initiating", "gate": "G1", "trigger": "Project request received", "owner": "Project Manager", "approver": "Project Manager", "consulted": "Sponsor, Business Owner", "baseline": "Not baselined — snapshot at each gate", "cadence": "Monthly and on organizational change", "feeds": ["04", "11", "12", "14", "16"], "fedBy": ["01"], "accept": ["Every stakeholder scored for power and interest", "Current and desired engagement recorded for all key stakeholders", "Each key stakeholder has a relationship owner", "Register reviewed at each gate"]}, {"no": "11", "title": "Stakeholder Engagement Plan", "code": "SEP", "id": "PRJ-2026-001-SEP", "ext": "docx", "domains": ["Stakeholders"], "focus": ["Planning", "Executing"], "cat": "PLAN", "catName": "Controlled management plan", "catRule": "Approved at G2 with the Integrated PMP. Minor edits = 1.x (PM); changes to process, thresholds or authority = major version via CR.", "tailor": {"Low": "O", "Medium": "C", "High": "M"}, "cls": "Conditional", "cond": "Mandatory when the project spans more than one organization or drives significant organizational change.", "created": "Planning", "gate": "G2", "trigger": "Stakeholder Register established", "owner": "Project Manager", "approver": "Project Sponsor", "consulted": "Change lead, Business Owner", "baseline": "Approved at G2 with the PMP", "cadence": "Monthly engagement review", "feeds": ["02", "12", "22"], "fedBy": ["10"], "accept": ["Engagement gap and action defined for every key stakeholder", "Each action has an owner, date and success indicator", "Engagement metrics have targets (e.g. ≥ 80% at desired level)"]}, {"no": "12", "title": "Communication Plan", "code": "COM", "id": "PRJ-2026-001-COM", "ext": "xlsx", "domains": ["Stakeholders"], "focus": ["Planning", "Executing"], "cat": "PLAN", "catName": "Controlled management plan", "catRule": "Approved at G2 with the Integrated PMP. Minor edits = 1.x (PM); changes to process, thresholds or authority = major version via CR.", "tailor": {"Low": "M", "Medium": "M", "High": "M"}, "cls": "Mandatory", "cond": "", "created": "Planning", "gate": "G2", "trigger": "Stakeholder Register established", "owner": "Project Manager", "approver": "Project Manager", "consulted": "Sponsor, Change lead", "baseline": "Approved at G2; maintained as a living plan", "cadence": "Review monthly", "feeds": ["02", "22"], "fedBy": ["02", "10", "11", "14"], "accept": ["Every governance forum and report has audience, owner, frequency and channel", "Escalation path matches the Integrated PMP", "Status report cadence and distribution defined"]}, {"no": "13", "title": "Resource Management Plan", "code": "RMP", "id": "PRJ-2026-001-RMP", "ext": "docx", "domains": ["Resources"], "focus": ["Planning", "Executing"], "cat": "PLAN", "catName": "Controlled management plan", "catRule": "Approved at G2 with the Integrated PMP. Minor edits = 1.x (PM); changes to process, thresholds or authority = major version via CR.", "tailor": {"Low": "O", "Medium": "C", "High": "M"}, "cls": "Conditional", "cond": "Mandatory when the team exceeds ~10 people, uses contracted staff, or shares scarce resources.", "created": "Planning", "gate": "G2", "trigger": "WBS drafted", "owner": "Project Manager", "approver": "Project Sponsor", "consulted": "Functional managers, HR", "baseline": "Approved at G2 with the PMP", "cadence": "Review at each gate", "feeds": ["02", "07", "09", "14"], "fedBy": ["01", "05", "07", "14"], "accept": ["Every role has responsibilities, authority and competencies", "Acquisition source and dates defined for each role", "Physical resources listed with source and dates", "Release and handover procedure defined"]}, {"no": "14", "title": "RACI Matrix", "code": "RACI", "id": "PRJ-2026-001-RACI", "ext": "xlsx", "domains": ["Resources", "Governance"], "focus": ["Planning"], "cat": "LIVE", "catName": "Living register / log", "catRule": "Not baselined. Maintained continuously at the defined cadence; snapshot captured at each gate; version increments on each formal issue.", "tailor": {"Low": "C", "Medium": "M", "High": "M"}, "cls": "Mandatory", "cond": "Low complexity: responsibilities may be shown in the Charter role table.", "created": "Planning", "gate": "G2", "trigger": "WBS and roles defined", "owner": "Project Manager", "approver": "Project Manager", "consulted": "All role holders", "baseline": "Approved at G2; maintained as roles change", "cadence": "Review at each gate", "feeds": ["02", "12", "13"], "fedBy": ["05", "10", "13"], "accept": ["Exactly one 'A' per row", "At least one 'R' per row", "Every level-2 WBS element and governance deliverable covered"]}, {"no": "15", "title": "Risk Management Plan", "code": "RKP", "id": "PRJ-2026-001-RKP", "ext": "docx", "domains": ["Risk"], "focus": ["Planning"], "cat": "PLAN", "catName": "Controlled management plan", "catRule": "Approved at G2 with the Integrated PMP. Minor edits = 1.x (PM); changes to process, thresholds or authority = major version via CR.", "tailor": {"Low": "C", "Medium": "M", "High": "M"}, "cls": "Mandatory", "cond": "Low complexity: risk approach may be a section of the Integrated PMP (02).", "created": "Planning", "gate": "G2", "trigger": "Charter approved", "owner": "Project Manager", "approver": "Project Sponsor", "consulted": "Team, PMO", "baseline": "Approved at G2 with the PMP", "cadence": "Review at each gate", "feeds": ["02", "08", "09", "16"], "fedBy": ["01"], "accept": ["Probability and impact scales defined (1–5) with objective criteria", "5×5 matrix bands and required action per band defined", "Risk appetite and escalation thresholds quantified", "Contingency derivation method stated"]}, {"no": "16", "title": "Risk Register + 5×5 Matrix", "code": "RKR", "id": "PRJ-2026-001-RKR", "ext": "xlsx", "domains": ["Risk"], "focus": ["Planning", "Executing", "Monitoring & Controlling"], "cat": "LIVE", "catName": "Living register / log", "catRule": "Not baselined. Maintained continuously at the defined cadence; snapshot captured at each gate; version increments on each formal issue.", "tailor": {"Low": "M", "Medium": "M", "High": "M"}, "cls": "Mandatory", "cond": "", "created": "Planning", "gate": "G2", "trigger": "Risk Management Plan drafted", "owner": "Project Manager", "approver": "Project Manager (escalated risks: Sponsor)", "consulted": "Risk owners", "baseline": "Risk profile snapshot at G2 sets contingency", "cadence": "Weekly review of High/Critical; full review monthly", "feeds": ["07", "09", "19", "22", "23", "24"], "fedBy": ["05", "10", "15", "18"], "accept": ["Each risk written as cause → event → effect", "Every High/Critical risk has an owner, response and due date", "Residual score recorded after response", "EMV totals reconcile to contingency reserve"]}, {"no": "17", "title": "Quality Management Plan", "code": "QMP", "id": "PRJ-2026-001-QMP", "ext": "docx", "domains": ["Scope", "Governance"], "focus": ["Planning", "Executing"], "cat": "PLAN", "catName": "Controlled management plan", "catRule": "Approved at G2 with the Integrated PMP. Minor edits = 1.x (PM); changes to process, thresholds or authority = major version via CR.", "tailor": {"Low": "O", "Medium": "C", "High": "M"}, "cls": "Conditional", "cond": "Mandatory when regulated, safety-critical, or when contractual quality standards apply.", "created": "Planning", "gate": "G2", "trigger": "Requirements and scope defined", "owner": "QA Lead", "approver": "Project Sponsor", "consulted": "Business Owner, Technical Lead", "baseline": "Approved at G2 with the PMP", "cadence": "Review at each gate and after audits", "feeds": ["02", "24", "25"], "fedBy": ["03", "04"], "accept": ["Each quality objective has metric, target and measurement method", "QA audits and QC activities scheduled", "Non-conformance severity and corrective-action process defined"]}, {"no": "18", "title": "Procurement Plan", "code": "PRC", "id": "PRJ-2026-001-PRC", "ext": "docx", "domains": ["Resources", "Finance"], "focus": ["Planning", "Executing"], "cat": "PLAN", "catName": "Controlled management plan", "catRule": "Approved at G2 with the Integrated PMP. Minor edits = 1.x (PM); changes to process, thresholds or authority = major version via CR.", "tailor": {"Low": "C", "Medium": "C", "High": "M"}, "cls": "Conditional", "cond": "Mandatory whenever goods or services are acquired from external suppliers.", "created": "Planning", "gate": "G2", "trigger": "Make-or-buy decision", "owner": "Project Manager", "approver": "Project Sponsor / Procurement Lead", "consulted": "Procurement, Legal, Finance", "baseline": "Approved at G2 with the PMP", "cadence": "Review per procurement event", "feeds": ["02", "07", "09", "16"], "fedBy": ["01", "08"], "accept": ["Make-or-buy decision documented for each item", "Contract type and procurement method justified", "Weighted source-selection criteria total 100%", "Vendor performance KPIs defined"]}, {"no": "19", "title": "RAID Log", "code": "RAID", "id": "PRJ-2026-001-RAID", "ext": "xlsx", "domains": ["Risk", "Governance"], "focus": ["Executing", "Monitoring & Controlling"], "cat": "LIVE", "catName": "Living register / log", "catRule": "Not baselined. Maintained continuously at the defined cadence; snapshot captured at each gate; version increments on each formal issue.", "tailor": {"Low": "M", "Medium": "M", "High": "M"}, "cls": "Mandatory", "cond": "", "created": "Executing", "gate": "G2", "trigger": "Plans baselined", "owner": "Project Manager", "approver": "Project Manager", "consulted": "Team, owners", "baseline": "Not baselined — snapshot at each gate", "cadence": "Weekly team review", "feeds": ["20", "22", "23", "24"], "fedBy": ["02", "16"], "accept": ["Every open item has an owner and target date", "Issues escalated per level within stated response times", "No issue older than 30 days without a review entry"]}, {"no": "20", "title": "Change Request", "code": "CR", "id": "PRJ-2026-001-CR", "ext": "docx", "domains": ["Governance"], "focus": ["Monitoring & Controlling"], "cat": "FORM", "catName": "Control form / record", "catRule": "One instance per event (e.g. per change). Each instance is uniquely identified and filed; template itself is version-controlled by the PMO.", "tailor": {"Low": "M", "Medium": "M", "High": "M"}, "cls": "Mandatory", "cond": "", "created": "Monitoring & Controlling", "gate": "G2", "trigger": "Any proposed change to a baseline or controlled document", "owner": "Requestor / Project Manager", "approver": "PM, CCB or Steering Committee per threshold", "consulted": "Affected owners", "baseline": "Each instance filed; approved CRs re-baseline affected artefacts", "cadence": "Per change", "feeds": ["21", "23"], "fedBy": ["02", "19"], "accept": ["Impact quantified for scope, schedule (days) and cost", "Options and recommendation recorded", "Decision authority matches the threshold in the Integrated PMP", "Documents to re-version listed"]}, {"no": "21", "title": "Change Log", "code": "CHL", "id": "PRJ-2026-001-CHL", "ext": "xlsx", "domains": ["Governance"], "focus": ["Monitoring & Controlling"], "cat": "LIVE", "catName": "Living register / log", "catRule": "Not baselined. Maintained continuously at the defined cadence; snapshot captured at each gate; version increments on each formal issue.", "tailor": {"Low": "M", "Medium": "M", "High": "M"}, "cls": "Mandatory", "cond": "", "created": "Monitoring & Controlling", "gate": "G2", "trigger": "First change request", "owner": "Project Manager", "approver": "Project Manager", "consulted": "CCB", "baseline": "Not baselined", "cadence": "Updated per change; reviewed at each CCB", "feeds": ["22", "25"], "fedBy": ["02", "20"], "accept": ["Every CR logged within 2 business days", "Approved impacts reconcile to baseline revisions", "Decision date and authority recorded for all closed CRs"]}, {"no": "22", "title": "Project Status Report", "code": "PSR", "id": "PRJ-2026-001-PSR", "ext": "pptx", "domains": ["Governance", "Stakeholders"], "focus": ["Monitoring & Controlling"], "cat": "RPT", "catName": "Performance report", "catRule": "Issued per reporting period; not baselined; each issue is a new numbered report and is never edited after distribution.", "tailor": {"Low": "M", "Medium": "M", "High": "M"}, "cls": "Mandatory", "cond": "", "created": "Monitoring & Controlling", "gate": "G2", "trigger": "End of each reporting period", "owner": "Project Manager", "approver": "Project Manager (distributed to Sponsor)", "consulted": "Workstream leads", "baseline": "Not baselined — numbered periodic issue", "cadence": "Bi-weekly or monthly per Communication Plan", "feeds": ["23", "24", "25"], "fedBy": ["02", "04", "06", "07", "08", "09", "11", "12", "16", "19", "21"], "accept": ["RAG status applies the Integrated PMP thresholds", "SPI/CPI and milestone variance stated", "All Critical risks and High issues reported", "Decisions required named with owner and date"]}, {"no": "23", "title": "Decision Log", "code": "DCL", "id": "PRJ-2026-001-DCL", "ext": "xlsx", "domains": ["Governance"], "focus": ["Executing", "Monitoring & Controlling"], "cat": "LIVE", "catName": "Living register / log", "catRule": "Not baselined. Maintained continuously at the defined cadence; snapshot captured at each gate; version increments on each formal issue.", "tailor": {"Low": "C", "Medium": "M", "High": "M"}, "cls": "Mandatory", "cond": "Low complexity: decisions may be recorded in meeting minutes.", "created": "Executing", "gate": "G2", "trigger": "First governance decision", "owner": "Project Manager", "approver": "Project Manager", "consulted": "Decision makers", "baseline": "Not baselined", "cadence": "Per decision", "feeds": ["24", "25"], "fedBy": ["02", "16", "19", "20", "22"], "accept": ["Each decision records options, rationale and authority level", "Related CR, risk or issue referenced", "Decision communicated to named audience"]}, {"no": "24", "title": "Lessons Learned Register", "code": "LLR", "id": "PRJ-2026-001-LLR", "ext": "xlsx", "domains": ["Governance"], "focus": ["Executing", "Closing"], "cat": "LIVE", "catName": "Living register / log", "catRule": "Not baselined. Maintained continuously at the defined cadence; snapshot captured at each gate; version increments on each formal issue.", "tailor": {"Low": "M", "Medium": "M", "High": "M"}, "cls": "Mandatory", "cond": "", "created": "Executing", "gate": "G2", "trigger": "Plans baselined", "owner": "Project Manager", "approver": "Project Manager", "consulted": "Team, stakeholders, PMO", "baseline": "Not baselined — final issue at G5", "cadence": "At each gate and after significant events", "feeds": ["25"], "fedBy": ["02", "16", "17", "19", "22", "23"], "accept": ["Lessons captured at every gate, not only at closure", "Each lesson tagged by focus area and performance domain", "Each 'to improve' lesson has a recommendation and owner"]}, {"no": "25", "title": "Project Closure Report", "code": "PCR", "id": "PRJ-2026-001-PCR", "ext": "docx", "domains": ["Governance", "Finance"], "focus": ["Closing"], "cat": "CLOSE", "catName": "Closing record", "catRule": "Approved at G5; becomes a permanent organizational process asset.", "tailor": {"Low": "M", "Medium": "M", "High": "M"}, "cls": "Mandatory", "cond": "", "created": "Closing", "gate": "G5", "trigger": "Final acceptance (G4)", "owner": "Project Manager", "approver": "Project Sponsor", "consulted": "Business Owner, Finance, PMO", "baseline": "Approved at G5; archived", "cadence": "Once", "feeds": [], "fedBy": ["01", "02", "04", "07", "09", "17", "21", "22", "23", "24"], "accept": ["Each Charter objective reported as met / partly met / not met with evidence", "Final cost and schedule variance against baselines stated", "All outstanding items transferred to named owners", "Administrative closure checklist complete"]}], "domains": ["Governance", "Scope", "Schedule", "Finance", "Stakeholders", "Resources", "Risk"], "focus": ["Initiating", "Planning", "Executing", "Monitoring & Controlling", "Closing"], "principles": ["Adopt a holistic view", "Focus on value", "Embed quality", "Lead accountably", "Integrate sustainability", "Build empowered teams"], "gates": [{"id": "G1", "name": "Initiation gate", "fa": "Initiating", "appr": "Project Sponsor", "crit": "Charter signed; Stakeholder Register established; PM appointed with delegated authority."}, {"id": "G2", "name": "Planning / baseline gate", "fa": "Planning", "appr": "Steering Committee", "crit": "Integrated PMP v1.0 approved; scope, schedule and cost baselines approved; risk register populated; contingency set."}, {"id": "G3", "name": "Execution readiness / mid-point gate", "fa": "Executing", "appr": "Steering Committee", "crit": "Deliverables built to plan; quality control evidence available; performance within tolerance or recovery plan approved."}, {"id": "G4", "name": "Acceptance & transition gate", "fa": "Monitoring & Controlling", "appr": "Sponsor / Business Owner", "crit": "All deliverables formally accepted against criteria; RTM fully verified; operational handover agreed."}, {"id": "G5", "name": "Closure gate", "fa": "Closing", "appr": "Project Sponsor", "crit": "Closure Report approved; contracts and finances closed; lessons learned submitted; records archived."}], "cats": {"AUTH": ["Authorizing document", "Approved once at G1. Changes to objectives, budget envelope or PM authority require a Sponsor-approved CR and a major version."], "BASE": ["Baseline component", "Frozen at G2 as part of the performance measurement baseline. Changed only through an approved CR; re-issue as a major version (2.0, 3.0...)."], "PLAN": ["Controlled management plan", "Approved at G2 with the Integrated PMP. Minor edits = 1.x (PM); changes to process, thresholds or authority = major version via CR."], "LIVE": ["Living register / log", "Not baselined. Maintained continuously at the defined cadence; snapshot captured at each gate; version increments on each formal issue."], "FORM": ["Control form / record", "One instance per event (e.g. per change). Each instance is uniquely identified and filed; template itself is version-controlled by the PMO."], "RPT": ["Performance report", "Issued per reporting period; not baselined; each issue is a new numbered report and is never edited after distribution."], "CLOSE": ["Closing record", "Approved at G5; becomes a permanent organizational process asset."]}, "authority": [["Scope change", "None (no scope change)", "Minor change within objectives", "Change to objectives or major deliverables"], ["Schedule change", "≤ 5 working days, no milestone impact", "≤ 20 working days, no gate date change", "> 20 working days or any gate date change"], ["Cost change", "≤ CAD 10,000 within control account", "≤ CAD 50,000", "> CAD 50,000 or use of management reserve"], ["Contingency reserve", "Release per risk response, logged", "Release > 25% of remaining contingency", "Replenishment from management reserve"], ["Single commitment / PO", "≤ CAD 10,000", "—", "≤ CAD 100,000 (Sponsor); above: Steering Committee"], ["Baseline (re-baselining)", "—", "Recommend", "Approve"], ["Risk acceptance", "Low / Medium", "High", "Critical"], ["Gate approval", "Prepare evidence", "—", "Approve (G1, G4, G5: Sponsor; G2, G3: Steering Committee)"]], "escalation": [["1", "Project Manager", "Within team tolerance", "2 business days"], ["2", "Project Sponsor", "Tolerance threatened, cross-functional conflict, resource conflict", "5 business days"], ["3", "Steering Committee", "Tolerance breached (Red), strategic or multi-project impact", "Next meeting or 48 h ad hoc"]], "rag": [["Schedule", "SPI ≥ 0.95 and no milestone slip", "SPI 0.90–0.94 or slip ≤ 10 wd", "SPI < 0.90 or slip > 10 wd"], ["Cost", "CPI ≥ 0.95", "CPI 0.90–0.94", "CPI < 0.90 or EAC > BAC + 10%"], ["Scope", "No unapproved change", "CRs pending > 2 weeks", "Unapproved scope change found"], ["Risk", "No open Critical risks", "Critical risk with approved response", "Critical risk without response"], ["Quality", "All acceptance criteria met", "Minor non-conformances open", "Major non-conformance open"]], "docStandard": [["Document ID", "<Project ID>-<Code>, e.g. PRJ-2026-001-CHR"], ["File name", "NN — Artefact Name_vX.Y.ext"], ["Cover / metadata", "Organization, project name & ID, document ID, version, status, date, sponsor, PM, approver, classification"], ["Document control table", "ID, title, project, version, status, owner, approver, classification, location, next review"], ["Revision history", "Version, date, author, description, Change Request reference"], ["Approval block", "Role, name, signature, date, decision — required for v1.0 and every major version"], ["Header / footer", "Project, title, Document ID, version / organization, classification, page x of y"], ["Status lifecycle", "Draft → In Review → Approved → Baselined → Superseded → Archived"], ["Classification", "Public / Internal / Confidential / Restricted"]], "glossary": [["Baseline", "Approved version of scope, schedule or cost, changeable only through integrated change control."], ["BAC", "Budget at Completion - total planned value of the work (cost baseline)."], ["CCB", "Change Control Board - body authorized to approve or reject change requests."], ["Contingency Reserve", "Budget/time within the baseline for identified risks (known-unknowns); controlled by the PM."], ["Control Account", "Management control point where scope, budget, actual cost and schedule are integrated and compared to earned value."], ["CPI / SPI", "Cost / Schedule Performance Index (EV/AC and EV/PV). >1.00 is favourable."], ["Deliverable", "Any unique, verifiable product, result or capability required to complete the project."], ["EAC / ETC", "Estimate at Completion / Estimate to Complete."], ["EV / PV / AC", "Earned Value / Planned Value / Actual Cost."], ["Focus Area", "PMBOK 8 grouping of processes by timing: Initiating, Planning, Executing, Monitoring & Controlling, Closing."], ["Issue", "A current condition or situation that may affect project objectives (a risk that has materialized)."], ["Management Reserve", "Budget outside the cost baseline for unknown-unknowns; released only by the Sponsor."], ["Performance Domain", "PMBOK 8 area of practice: Governance, Scope, Schedule, Finance, Stakeholders, Resources, Risk."], ["Planning Package", "WBS component below a control account with known content but no detailed activities yet."], ["RACI", "Responsible, Accountable, Consulted, Informed. Exactly one 'A' per activity."], ["RAG", "Red / Amber / Green status indicator, thresholds defined in the Integrated PMP."], ["Risk", "An uncertain event or condition that, if it occurs, has a positive (opportunity) or negative (threat) effect on objectives."], ["RTM", "Requirements Traceability Matrix - links each requirement to its source, WBS, deliverable and test."], ["Tailoring", "Deliberate adaptation of approach, governance and processes to suit the project context."], ["WBS", "Work Breakdown Structure - hierarchical decomposition of the total scope of work."], ["Work Package", "Lowest level of the WBS for which cost and duration are estimated and managed."]], "versioning": [["0.1 - 0.9", "Draft", "Work in progress. Increment the minor digit for each review cycle (0.1, 0.2 ...)."], ["1.0", "Approved / Baselined", "First version formally approved by the designated approver. Becomes the baseline."], ["1.1, 1.2 ...", "Minor revision", "Editorial or clarifying change with NO impact on scope, schedule or cost baselines. PM approval."], ["2.0, 3.0 ...", "Major revision", "Change that alters a baseline. Requires an approved Change Request (doc 20) logged in the Change Log (doc 21)."]], "meta": {"Organization": "[Organization Name]", "Project name": "[Project Name]", "Project ID": "PRJ-2026-001", "Sponsor": "[Project Sponsor]", "Project Manager": "[Project Manager]", "PMO / Portfolio": "[PMO / Portfolio]", "Planned start / finish": "2026-11-02 / 2027-10-29", "Currency": "CAD", "Delivery approach": "Predictive (plan-driven)", "Classification": "Internal"}}</script>
+<script id="fw-files" type="application/json">{"list": [{"name": "00 — Master PMO Documentation Framework.xlsx", "path": "00-master-pmo-documentation-framework.xlsx", "label": "Master PMO Documentation Framework", "ext": "xlsx", "size": 38532, "no": null, "id": "PRJ-2026-001-MDF"}, {"name": "00 — Toolkit Guide & Document Standards.docx", "path": "00-toolkit-guide-and-document-standards.docx", "label": "Toolkit Guide & Document Standards", "ext": "docx", "size": 49106, "no": null, "id": "PRJ-2026-001-GDE"}, {"name": "01 — Project Charter.docx", "path": "01-project-charter.docx", "label": "Project Charter", "ext": "docx", "size": 43439, "no": "01"}, {"name": "02 — Integrated Project Management Plan.docx", "path": "02-integrated-project-management-plan.docx", "label": "Integrated Project Management Plan", "ext": "docx", "size": 45161, "no": "02"}, {"name": "03 — Scope Management Plan.docx", "path": "03-scope-management-plan.docx", "label": "Scope Management Plan", "ext": "docx", "size": 42295, "no": "03"}, {"name": "04 — Requirements & RTM.xlsx", "path": "04-requirements-and-rtm.xlsx", "label": "Requirements & RTM", "ext": "xlsx", "size": 21424, "no": "04"}, {"name": "05 — WBS & WBS Dictionary.xlsx", "path": "05-wbs-and-wbs-dictionary.xlsx", "label": "WBS & WBS Dictionary", "ext": "xlsx", "size": 26269, "no": "05"}, {"name": "06 — Schedule Management Plan.docx", "path": "06-schedule-management-plan.docx", "label": "Schedule Management Plan", "ext": "docx", "size": 42448, "no": "06"}, {"name": "07 — Master Schedule.xlsx", "path": "07-master-schedule.xlsx", "label": "Master Schedule", "ext": "xlsx", "size": 31124, "no": "07"}, {"name": "08 — Financial Management Plan.docx", "path": "08-financial-management-plan.docx", "label": "Financial Management Plan", "ext": "docx", "size": 42790, "no": "08"}, {"name": "09 — Project Budget.xlsx", "path": "09-project-budget.xlsx", "label": "Project Budget", "ext": "xlsx", "size": 38390, "no": "09"}, {"name": "10 — Stakeholder Register.xlsx", "path": "10-stakeholder-register.xlsx", "label": "Stakeholder Register", "ext": "xlsx", "size": 21126, "no": "10"}, {"name": "11 — Stakeholder Engagement Plan.docx", "path": "11-stakeholder-engagement-plan.docx", "label": "Stakeholder Engagement Plan", "ext": "docx", "size": 42201, "no": "11"}, {"name": "12 — Communication Plan.xlsx", "path": "12-communication-plan.xlsx", "label": "Communication Plan", "ext": "xlsx", "size": 17566, "no": "12"}, {"name": "13 — Resource Management Plan.docx", "path": "13-resource-management-plan.docx", "label": "Resource Management Plan", "ext": "docx", "size": 42641, "no": "13"}, {"name": "14 — RACI Matrix.xlsx", "path": "14-raci-matrix.xlsx", "label": "RACI Matrix", "ext": "xlsx", "size": 19154, "no": "14"}, {"name": "15 — Risk Management Plan.docx", "path": "15-risk-management-plan.docx", "label": "Risk Management Plan", "ext": "docx", "size": 43777, "no": "15"}, {"name": "16 — Risk Register + 5×5 Matrix.xlsx", "path": "16-risk-register-and-5x5-matrix.xlsx", "label": "Risk Register + 5×5 Matrix", "ext": "xlsx", "size": 31455, "no": "16"}, {"name": "17 — Quality Management Plan.docx", "path": "17-quality-management-plan.docx", "label": "Quality Management Plan", "ext": "docx", "size": 42238, "no": "17"}, {"name": "18 — Procurement Plan.docx", "path": "18-procurement-plan.docx", "label": "Procurement Plan", "ext": "docx", "size": 42606, "no": "18"}, {"name": "19 — RAID Log.xlsx", "path": "19-raid-log.xlsx", "label": "RAID Log", "ext": "xlsx", "size": 36363, "no": "19"}, {"name": "20 — Change Request.docx", "path": "20-change-request.docx", "label": "Change Request", "ext": "docx", "size": 41555, "no": "20"}, {"name": "21 — Change Log.xlsx", "path": "21-change-log.xlsx", "label": "Change Log", "ext": "xlsx", "size": 19709, "no": "21"}, {"name": "22 — Project Status Report.docx", "path": "22-project-status-report.docx", "label": "Project Status Report (Word)", "ext": "docx", "size": 41674, "no": "22"}, {"name": "22 — Project Status Report.pptx", "path": "22-project-status-report.pptx", "label": "Project Status Report", "ext": "pptx", "size": 46174, "no": "22"}, {"name": "23 — Decision Log.xlsx", "path": "23-decision-log.xlsx", "label": "Decision Log", "ext": "xlsx", "size": 15848, "no": "23"}, {"name": "24 — Lessons Learned Register.xlsx", "path": "24-lessons-learned-register.xlsx", "label": "Lessons Learned Register", "ext": "xlsx", "size": 20465, "no": "24"}, {"name": "25 — Project Closure Report.docx", "path": "25-project-closure-report.docx", "label": "Project Closure Report", "ext": "docx", "size": 42412, "no": "25"}], "data": {}, "base": "files/", "external": false, "zip": {"name": "PMI_Predictive_PM_Toolkit_PMBOK8.zip", "path": "PMI_Predictive_PM_Toolkit_PMBOK8.zip"}}</script>
+<script>
+(function(){
+const D = JSON.parse(document.getElementById('fw-data').textContent);
+const FILES = JSON.parse(document.getElementById('fw-files').textContent);
+const A = D.artefacts, BY = Object.fromEntries(A.map(a=>[a.no,a]));
+const CLS = {M:'Mandatory',C:'Conditional',O:'Optional'};
+const $ = s=>document.querySelector(s);
+const esc = s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+let cx = 'Medium';
+try{ cx = localStorage.getItem('pmo-cx') || 'Medium'; }catch(e){}
+const state = {q:'', dom:'', fa:'', cls:'', flowDoc:'01'};
+
+// ---------- id plate
+$('#idplate').innerHTML = [['Framework ID', D.project.id+'-MDF'],['Version', D.version+' '+D.status],['Artefacts', A.length+' + 2 governance docs'],['Owner','PMO Lead']]
+  .map(([k,v])=>`<dt>${k}</dt><dd>${esc(v)}</dd>`).join('');
+
+const cls = a => a.tailor[cx];
+const chip = (c, wide) => `<span class="cls ${c}${wide?' wide':''}" title="${CLS[c]}">${wide?CLS[c]:c}</span>`;
+const ref = no => `<a class="ref" href="#doc-${no}" data-doc="${no}" title="${esc(BY[no].title)}">${no}</a>`;
+
+// ---------- complexity switch
+function paintCx(){
+  document.querySelectorAll('#cxseg button').forEach(b=>b.setAttribute('aria-pressed', b.dataset.cx===cx));
+}
+$('#cxseg').addEventListener('click', e=>{
+  const b=e.target.closest('button'); if(!b) return;
+  cx=b.dataset.cx; try{localStorage.setItem('pmo-cx',cx)}catch(e){}
+  paintCx(); renderAll(); if(openDoc) showDoc(openDoc, true);
+});
+
+// ---------- OVERVIEW
+function overview(){
+  const t = {M:0,C:0,O:0}; A.forEach(a=>t[cls(a)]++);
+  $('#v-overview').innerHTML = `
+  <div class="head"><div class="eyebrow">How the framework is built</div>
+  <h2>One documentation architecture, governed end to end</h2>
+  <p class="lead">Each artefact has a fixed place in the PMBOK 8 structure, a defined owner and approver, a baseline rule and explicit inputs and outputs. Choose the project complexity in the bar above; the register, gates and library recalculate which artefacts are mandatory.</p></div>
+  <div class="stack">
+    <div><span class="eyebrow">Principles</span><span class="n">6</span><ul>${D.principles.map(p=>`<li>${esc(p)}</li>`).join('')}</ul></div>
+    <div><span class="eyebrow">Performance domains</span><span class="n">7</span><ul>${D.domains.map(p=>`<li>${esc(p)}</li>`).join('')}</ul></div>
+    <div><span class="eyebrow">Focus areas</span><span class="n">5</span><ul>${D.focus.map(p=>`<li>${esc(p)}</li>`).join('')}</ul></div>
+    <div><span class="eyebrow">Governance gates</span><span class="n">5</span><ul>${D.gates.map(g=>`<li><span class="mono">${g.id}</span> ${esc(g.name)}</li>`).join('')}</ul></div>
+    <div><span class="eyebrow">Controlled artefacts</span><span class="n">${A.length}</span><ul><li>${A.filter(a=>a.ext==='docx').length} Word plans &amp; forms</li><li>${A.filter(a=>a.ext==='xlsx').length} Excel registers &amp; logs</li><li>1 status report deck (+ Word version)</li><li>Framework register &amp; toolkit guide</li></ul></div>
+  </div>
+  <div class="head"><div class="eyebrow">Required set for a ${cx.toLowerCase()}-complexity project</div></div>
+  <div class="tally">
+    <div class="t">${chip('M',1)}<b>${t.M}</b><span class="muted">must exist at the stated gate</span></div>
+    <div class="t">${chip('C',1)}<b>${t.C}</b><span class="muted">required when the condition applies</span></div>
+    <div class="t">${chip('O',1)}<b>${t.O}</b><span class="muted">use when it adds value</span></div>
+  </div>
+  <div class="two">
+    <div class="panel"><h3>Classification rules</h3>
+      <dl class="kv"><dt>Mandatory</dt><dd>Must be produced, approved where an approver is named, and current at every gate from its creation gate onward. Absence blocks the gate.</dd>
+      <dt>Conditional</dt><dd>Mandatory when the stated condition applies (for example, external procurement or regulated quality). The PM records the decision and rationale in the Integrated PMP tailoring table.</dd>
+      <dt>Optional</dt><dd>May be merged into the Integrated PMP or omitted. Omission is recorded as a tailoring decision.</dd></dl></div>
+    <div class="panel"><h3>Control categories</h3>
+      <dl class="kv">${Object.entries(D.cats).map(([k,c])=>`<dt>${esc(c[0])}</dt><dd>${esc(c[1])}</dd>`).join('')}</dl></div>
+  </div>
+  <div class="head"><div class="eyebrow">Using the framework on a project</div></div>
+  <ol class="steps">
+    <li><b>Classify the project</b><span class="muted">Assess complexity (low, medium, high) with the PMO and select it above.</span></li>
+    <li><b>Tailor the set</b><span class="muted">Confirm each conditional artefact and record decisions in the Integrated PMP (02).</span></li>
+    <li><b>Initiate (G1)</b><span class="muted">Charter and Stakeholder Register approved; PM authority delegated.</span></li>
+    <li><b>Plan and baseline (G2)</b><span class="muted">Subsidiary plans approved; scope, schedule and cost baselines frozen at v1.0.</span></li>
+    <li><b>Execute and control</b><span class="muted">Maintain living registers; change baselines only through Change Requests (20, 21).</span></li>
+    <li><b>Accept and close (G4, G5)</b><span class="muted">Formal acceptance, Closure Report, lessons learned, archive.</span></li>
+  </ol>`;
+}
+
+// ---------- REGISTER
+function register(){
+  const v = $('#v-register');
+  if(!v.dataset.built){
+    v.innerHTML = `
+    <div class="head"><div class="eyebrow">Master Document Register</div><h2>Every artefact, its obligation and its controls</h2>
+    <p class="lead">Select a row to open the full governance record: trigger, owner and approver, baseline rule, cadence, inputs and outputs, and objective acceptance criteria.</p></div>
+    <div class="filters">
+      <input id="f-q" type="search" placeholder="Search artefact, owner, ID…" aria-label="Search">
+      <select id="f-fa" aria-label="Focus area"><option value="">All focus areas</option>${D.focus.map(f=>`<option>${esc(f)}</option>`).join('')}</select>
+      <select id="f-cls" aria-label="Classification"><option value="">M, C and O</option><option value="M">Mandatory only</option><option value="C">Conditional only</option><option value="O">Optional only</option></select>
+    </div>
+    <div class="dfilter" id="f-dom" role="group" aria-label="Performance domain"><button type="button" data-d="" aria-pressed="true">All domains</button>${D.domains.map(d=>`<button type="button" data-d="${d}" aria-pressed="false">${d}</button>`).join('')}</div>
+    <div class="legend"><span>${chip('M')} Mandatory</span><span>${chip('C')} Conditional</span><span>${chip('O')} Optional</span><span class="count" id="regcount"></span></div>
+    <div class="tablebox"><table class="reg"><thead><tr>
+      <th>#</th><th>Artefact</th><th>Domain</th><th title="Low / Medium / High">L&nbsp;M&nbsp;H</th><th>Created</th><th>Owner</th><th>Approver</th><th>Baselined</th><th>Feeds</th></tr></thead><tbody id="regbody"></tbody></table></div>`;
+    v.dataset.built=1;
+    $('#f-q').addEventListener('input',e=>{state.q=e.target.value.toLowerCase();regRows()});
+    $('#f-fa').addEventListener('change',e=>{state.fa=e.target.value;regRows()});
+    $('#f-cls').addEventListener('change',e=>{state.cls=e.target.value;regRows()});
+    $('#f-dom').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;state.dom=b.dataset.d;
+      document.querySelectorAll('#f-dom button').forEach(x=>x.setAttribute('aria-pressed',x===b));regRows()});
+    $('#regbody').addEventListener('click',e=>{ if(e.target.closest('a')) return; const tr=e.target.closest('tr'); if(tr) location.hash='doc-'+tr.dataset.no; });
+  }
+  regRows();
+}
+function regRows(){
+  const rows = A.filter(a=>{
+    if(state.dom && !a.domains.includes(state.dom)) return false;
+    if(state.fa && !a.focus.includes(state.fa) && a.created!==state.fa) return false;
+    if(state.cls && cls(a)!==state.cls) return false;
+    if(state.q){const h=(a.no+' '+a.title+' '+a.id+' '+a.owner+' '+a.approver+' '+a.domains.join(' ')).toLowerCase(); if(!h.includes(state.q)) return false;}
+    return true;});
+  $('#regcount').textContent = rows.length+' of '+A.length+' artefacts';
+  $('#regbody').innerHTML = rows.map(a=>`<tr data-no="${a.no}" tabindex="0">
+    <td class="num">${a.no}</td>
+    <td class="t"><b>${esc(a.title)}</b><span class="mono muted">${a.id} · ${a.ext}</span></td>
+    <td>${a.domains.map(d=>`<span class="dchip">${d}</span>`).join(' ')}</td>
+    <td style="white-space:nowrap">${['Low','Medium','High'].map(k=>`<span style="opacity:${k===cx?1:.45}">${chip(a.tailor[k])}</span>`).join(' ')}</td>
+    <td style="white-space:nowrap">${esc(a.created)}<br><span class="mono muted">${a.gate}</span></td>
+    <td>${esc(a.owner)}</td><td>${esc(a.approver)}</td>
+    <td style="min-width:170px">${esc(a.baseline)}</td>
+    <td><div class="refs">${a.feeds.map(ref).join('') || '<span class="muted">OPA</span>'}</div></td></tr>`).join('') ||
+    `<tr><td colspan="9" class="muted">No artefact matches these filters. Clear the search or choose another domain.</td></tr>`;
+}
+document.addEventListener('keydown',e=>{ if(e.key==='Enter' && e.target.matches('#regbody tr')) location.hash='doc-'+e.target.dataset.no; });
+
+// ---------- LIFECYCLE
+function gateNeeds(a,g){const o=['G1','G2','G3','G4','G5'];if(a.no==='25')return g==='G5';if(a.cat==='FORM')return false;return o.indexOf(a.gate)<=o.indexOf(g);}
+function gateStatus(a,g){ if(a.gate===g) return ['AUTH','BASE','PLAN','CLOSE'].includes(a.cat)?'Approved v1.0':'Established';
+  if(['BASE','PLAN','AUTH'].includes(a.cat)) return 'Current version'; if(a.cat==='RPT') return 'Latest issue'; return g==='G5'?'Final, archived':'Current, snapshot'; }
+function lifecycle(){
+  const gateAfter = {'Initiating':'G1','Planning':'G2','Executing':'G3','Monitoring & Controlling':'G4','Closing':'G5'};
+  let g = `<div class="hd">Domain</div>` + D.focus.map(f=>`<div class="hd"><span>${f}</span><span class="g">${gateAfter[f]}</span></div>`).join('');
+  D.domains.forEach(dm=>{
+    g += `<div class="dm">${dm}</div>`;
+    D.focus.forEach(f=>{
+      const items = A.filter(a=>a.domains[0]===dm && (a.focus.includes(f)||a.created===f));
+      g += `<div class="cell">${items.map(a=>{const c=cls(a);return `<button type="button" class="pill ${a.created===f?'created':''} ${c==='O'?'dim':''}" data-doc="${a.no}" title="${CLS[c]} · ${esc(a.title)}"><span class="mono">${a.no}</span><span>${esc(a.title)}</span></button>`}).join('')}</div>`;
+    });
+  });
+  $('#v-lifecycle').innerHTML = `
+  <div class="head"><div class="eyebrow">Performance domains × focus areas</div><h2>Where each artefact lives in the predictive lifecycle</h2>
+  <p class="lead">Rows are the seven PMBOK 8 performance domains (by each artefact’s primary domain); columns are the five focus areas with the gate that closes them. A solid tile marks the focus area where the artefact is created; outlined tiles show where it remains active. Optional artefacts for the selected complexity are faded.</p></div>
+  <div class="tablebox"><div class="lc">${g}</div></div>
+  <div class="head"><div class="eyebrow">Gate checklists · ${cx} complexity</div><h2>What must be in place to pass each gate</h2></div>
+  <div class="gates">${D.gates.map(gt=>{
+    const req = A.filter(a=>gateNeeds(a,gt.id));
+    return `<div class="gate"><div style="display:flex;justify-content:space-between;align-items:baseline;gap:8px"><span class="gid">${gt.id}</span><span class="eyebrow">${esc(gt.fa)}</span></div>
+      <h3>${esc(gt.name)}</h3><p class="muted" style="font-size:.86rem">${esc(gt.crit)}</p>
+      <p style="font-size:.82rem"><b>Approver:</b> ${esc(gt.appr)}</p>
+      <ul>${req.map(a=>`<li>${chip(cls(a))}<a class="ref" href="#doc-${a.no}" data-doc="${a.no}">${a.no}</a><span>${esc(a.title)} <span class="muted">— ${gateStatus(a,gt.id)}</span></span></li>`).join('')}</ul></div>`}).join('')}</div>`;
+}
+
+// ---------- FLOW
+function flow(){
+  const a = BY[state.flowDoc];
+  const node = n=>`<button type="button" class="fnode" data-flow="${n}">${chip(cls(BY[n]))}<span class="mono">${n}</span><span>${esc(BY[n].title)}</span></button>`;
+  const inputs = a.fedBy.length? a.fedBy.map(node).join('') : `<p class="note">${a.no==='01'?'Business case / project request (outside the toolkit)':'No toolkit inputs'}</p>`;
+  const outputs = a.feeds.length? a.feeds.map(node).join('') : `<p class="note">Organizational process assets (PMO knowledge base)</p>`;
+  let m = `<table class="matrix"><thead><tr><th></th>${A.map(b=>`<th class="c" scope="col">${b.no}</th>`).join('')}</tr></thead><tbody>`;
+  A.forEach(r=>{ m += `<tr class="${r.no===a.no?'hl':''}"><th class="r" scope="row"><span class="mono">${r.no}</span> ${esc(r.title)}</th>` +
+    A.map(c=>`<td class="${r.feeds.includes(c.no)?'on':''} ${r.no===c.no?'self':''} ${c.no===a.no?'colhl':''}" title="${r.no} → ${c.no}"></td>`).join('') + `</tr>`; });
+  m += `</tbody></table>`;
+  $('#v-flow').innerHTML = `
+  <div class="head"><div class="eyebrow">Cross-references</div><h2>Which artefacts feed which</h2>
+  <p class="lead">Pick an artefact to see its inputs and outputs. Following the chain shows how a change in one document propagates: an approved Change Request re-baselines the WBS, which flows into the schedule, budget and status reporting.</p></div>
+  <div class="flow">
+    <div class="flowcol"><h3>Fed by (inputs)</h3>${inputs}</div>
+    <div class="focusnode"><span class="eyebrow">Selected artefact</span>
+      <select id="flowsel" aria-label="Select artefact">${A.map(b=>`<option value="${b.no}" ${b.no===a.no?'selected':''}>${b.no} — ${esc(b.title)}</option>`).join('')}</select>
+      <h3>${esc(a.title)}</h3><span class="mono" style="opacity:.8">${a.id} · ${esc(a.catName)}</span>
+      <p style="font-size:.88rem;opacity:.9">${esc(a.catRule)}</p>
+      <div><button type="button" class="btn sm ghost" style="border-color:var(--bg);color:var(--bg)" data-doc="${a.no}">Open governance record</button></div></div>
+    <div class="flowcol"><h3>Feeds (outputs)</h3>${outputs}</div>
+  </div>
+  <div class="head"><div class="eyebrow">Full traceability matrix</div><h3>Row feeds column · ${A.reduce((s,x)=>s+x.feeds.length,0)} documented relationships</h3></div>
+  <div class="tablebox" style="padding:14px">${m}</div>`;
+  $('#flowsel').addEventListener('change',e=>{state.flowDoc=e.target.value;flow();});
+}
+document.addEventListener('click',e=>{const f=e.target.closest('[data-flow]'); if(f){state.flowDoc=f.dataset.flow;flow();window.scrollTo({top:0,behavior:'smooth'});}});
+
+// ---------- CONTROLS
+function controls(){
+  const cc = ['Raise CR (20)','Log & ID (21)','Impact analysis','Decide per authority','Re-baseline & re-version','Communicate (12, 23)'];
+  $('#v-controls').innerHTML = `
+  <div class="head"><div class="eyebrow">Delegated authority &amp; escalation</div><h2>Who may decide what, and when it escalates</h2>
+  <p class="lead">PMO defaults. Each project confirms or tailors these values in the Integrated PMP (02); the Change Request form (20) cites the threshold that applies.</p></div>
+  <div class="tablebox"><table><thead><tr><th>Decision</th><th>Project Manager</th><th>Change Control Board</th><th>Sponsor / Steering Committee</th></tr></thead>
+  <tbody>${D.authority.map(r=>`<tr><td><b>${esc(r[0])}</b></td><td>${esc(r[1])}</td><td>${esc(r[2])}</td><td>${esc(r[3])}</td></tr>`).join('')}</tbody></table></div>
+  <div class="two">
+    <div class="panel"><h3>Escalation levels</h3><div class="tablebox"><table><thead><tr><th>Level</th><th>To</th><th>Trigger</th><th>Response</th></tr></thead>
+    <tbody>${D.escalation.map(r=>`<tr><td class="mono">${r[0]}</td><td><b>${esc(r[1])}</b></td><td>${esc(r[2])}</td><td>${esc(r[3])}</td></tr>`).join('')}</tbody></table></div></div>
+    <div class="panel"><h3>Integrated change control</h3>
+    <div class="cc">${cc.map((s,i)=>`<div><span class="k">Step ${i+1}</span><b>${esc(s)}</b></div>`).join('')}</div>
+    <p class="muted" style="font-size:.86rem">Approved changes to a baseline component produce a major version (2.0, 3.0…) of every affected artefact, recorded in its revision history with the CR reference.</p></div>
+  </div>
+  <div class="head"><div class="eyebrow">Measurement</div><h2>RAG thresholds used in every status report</h2></div>
+  <div class="tablebox"><table class="rag"><thead><tr><th>Dimension</th><th><span class="ragh" style="background:var(--green)"></span>Green</th><th><span class="ragh" style="background:var(--amber)"></span>Amber</th><th><span class="ragh" style="background:var(--red)"></span>Red</th></tr></thead>
+  <tbody>${D.rag.map(r=>`<tr><td><b>${esc(r[0])}</b></td><td class="g">${esc(r[1])}</td><td class="a">${esc(r[2])}</td><td class="r">${esc(r[3])}</td></tr>`).join('')}</tbody></table></div>
+  <div class="head"><div class="eyebrow">Baseline &amp; change-control relationships</div><h2>How each artefact is versioned and changed</h2></div>
+  <div class="tablebox"><table class="cat"><thead><tr><th>Control category</th><th>Rule</th><th>Artefacts</th></tr></thead>
+  <tbody>${Object.entries(D.cats).map(([k,c])=>`<tr><td>${esc(c[0])}</td><td>${esc(c[1])}</td><td><div class="refs">${A.filter(a=>a.cat===k).map(a=>ref(a.no)).join('')}</div></td></tr>`).join('')}</tbody></table></div>
+  <div class="panel"><h3>Performance measurement baseline</h3>
+    <dl class="kv"><dt>Scope baseline</dt><dd>Scope statement (03) + WBS and WBS Dictionary (05)</dd>
+    <dt>Schedule baseline</dt><dd>Approved activity and milestone dates (07)</dd>
+    <dt>Cost baseline</dt><dd>Time-phased budget including contingency, excluding management reserve (09)</dd>
+    <dt>PMB</dt><dd>Integrated scope, schedule and cost baseline used for earned value; frozen at G2 and changed only through approved Change Requests</dd></dl></div>`;
+}
+
+// ---------- STANDARDS
+function standards(){
+  $('#v-standards').innerHTML = `
+  <div class="head"><div class="eyebrow">Document-control standard</div><h2>Common metadata, versioning and approval</h2>
+  <p class="lead">Every artefact carries the same metadata block, control table, revision history and approval section, so any document can be identified, traced and audited the same way.</p></div>
+  <div class="tablebox"><table><thead><tr><th>Element</th><th>Standard</th></tr></thead><tbody>${D.docStandard.map(r=>`<tr><td><b>${esc(r[0])}</b></td><td>${esc(r[1])}</td></tr>`).join('')}</tbody></table></div>
+  <div class="two">
+    <div class="panel"><h3>Versioning scheme</h3><div class="tablebox"><table><thead><tr><th>Version</th><th>Meaning</th><th>Rule</th></tr></thead><tbody>${D.versioning.map(r=>`<tr><td class="mono">${esc(r[0])}</td><td><b>${esc(r[1])}</b></td><td>${esc(r[2])}</td></tr>`).join('')}</tbody></table></div></div>
+    <div class="panel"><h3>Common project metadata</h3><dl class="kv">${Object.entries(D.meta).map(([k,v])=>`<dt>${esc(k)}</dt><dd class="${String(v).startsWith('[')?'muted':''}">${esc(v)}</dd>`).join('')}</dl>
+    <p class="note">Placeholders are stamped from one configuration file, so all 25 artefacts always show identical metadata.</p></div>
+  </div>
+  <div class="head"><div class="eyebrow">Predictive governance terminology</div><h2>Glossary</h2></div>
+  <div class="tablebox"><table><thead><tr><th>Term</th><th>Definition</th></tr></thead><tbody>${D.glossary.map(r=>`<tr><td><b>${esc(r[0])}</b></td><td>${esc(r[1])}</td></tr>`).join('')}</tbody></table></div>
+  <p class="muted" style="font-size:.84rem">This framework is a tailored predictive implementation of the PMBOK® Guide – Eighth Edition (PMI, 2025). It is not a PMI publication; adapt values such as thresholds and authority limits to your organization.</p>`;
+}
+
+// ---------- LIBRARY & DOWNLOADS
+let dl = null, dlReady = false;
+const LINKS = !!FILES.base;            // static hosting: plain download links
+const blocked = () => !LINKS && dlReady && !dl;
+const href = f => FILES.base + encodeURIComponent(f.path);
+function dlBtn(f, label, klass){
+  if(LINKS) return `<a class="btn ${klass||''}" href="${href(f)}" download="${esc(f.name)}" ${FILES.external?'target="_blank" rel="noopener"':''}>${label}</a>`;
+  return `<button type="button" class="btn ${klass||''}" data-save="${esc(f.name)}" ${blocked()?'disabled':''}>${label}</button>`;
+}
+const fmtSize = n => n>1048576? (n/1048576).toFixed(1)+' MB' : Math.round(n/1024)+' KB';
+function bytes(name){ const b=atob(FILES.data[name]); const u=new Uint8Array(b.length); for(let i=0;i<b.length;i++)u[i]=b.charCodeAt(i); return u; }
+function toast(t){const el=$('#toast');el.textContent=t;el.hidden=false;clearTimeout(toast.t);toast.t=setTimeout(()=>el.hidden=true,3200);}
+async function save(name){
+  if(!dl){ toast('Downloads are available when this page is opened in Claude.'); return; }
+  try{ const r = await dl.save({filename:name, data:new Blob([bytes(name)])}); if(r && r.status==='saved') toast('Saved '+name); }
+  catch(err){ const c=err&&err.code; if(c==='declined') return; if(c==='rate_limited') toast('A save prompt is already open. Finish it, then try again.');
+    else toast('This file could not be saved here ('+(c||'unavailable')+').'); }
+}
+async function saveAll(){
+  if(!dl){ toast('Downloads are available when this page is opened in Claude.'); return; }
+  if(!window.JSZip){ toast('The zip builder did not load. Download files individually.'); return; }
+  const z = new JSZip(); const folder = z.folder('PMI Predictive PM Toolkit - PMBOK 8');
+  FILES.list.forEach(f=>folder.file(f.name, bytes(f.name)));
+  const blob = await z.generateAsync({type:'blob'});
+  try{ const r=await dl.save({filename:'PMI_Predictive_PM_Toolkit_PMBOK8.zip', data:blob}); if(r&&r.status==='saved') toast('Saved the complete toolkit'); }
+  catch(err){ if(err&&err.code!=='declined') toast('The toolkit could not be saved here ('+(err.code||'unavailable')+').'); }
+}
+function fileCard(f){
+  const a = f.no && BY[f.no];
+  return `<div class="file"><span class="ext ${f.ext}">${f.ext}</span>
+    <span class="nm" ${a?`data-doc="${a.no}"`:''}>${esc(f.label)}</span>
+    <span class="meta">${a?chip(cls(a)):'<span class="dchip">Governance</span>'}<span class="mono">${a?a.id:esc(f.id||'')}</span><span>${fmtSize(f.size)}</span></span>
+    <div class="act">${a?`<button type="button" class="btn sm ghost" data-doc="${a.no}">Record</button>`:''}${dlBtn(f,'Download','sm')}</div></div>`;
+}
+function library(){
+  const gov = FILES.list.filter(f=>!f.no);
+  const groups = D.domains.map(dm=>[dm, FILES.list.filter(f=>f.no && BY[f.no].domains[0]===dm)]);
+  const total = FILES.list.reduce((s,f)=>s+f.size,0);
+  $('#v-library').innerHTML = `
+  <div class="head"><div class="eyebrow">Document library</div><h2>Download the controlled templates</h2>
+  <p class="lead">Templates are grouped by primary performance domain. Each file opens with the shared cover, document-control table, revision history and approval block already in place.</p></div>
+  <div class="libtop"><span class="muted">${FILES.list.length} files · ${fmtSize(total)}</span>
+    ${LINKS && FILES.zip ? dlBtn(FILES.zip,'Download complete toolkit (.zip)') : `<button type="button" class="btn" id="saveall" ${blocked()?'disabled':''}>Download complete toolkit (.zip)</button>`}</div>
+  ${blocked()?'<p class="note">Downloads are not available in this view. Open this page in Claude to save the files.</p>':''}
+  <div class="libgroup"><h3>Framework &amp; standards</h3><div class="libgrid">${gov.map(fileCard).join('')}</div></div>
+  ${groups.map(([dm,fs])=>`<div class="libgroup"><h3>${dm} <span class="muted" style="font-weight:400;font-size:.85rem">${fs.length} files</span></h3><div class="libgrid">${fs.map(fileCard).join('')}</div></div>`).join('')}`;
+}
+document.addEventListener('click',e=>{
+  const s=e.target.closest('[data-save]'); if(s){ save(s.dataset.save); return; }
+  if(e.target.closest('#saveall')){ saveAll(); return; }
+});
+(async()=>{ if(LINKS){ dlReady=true; return; } try{ dl = await window.claude?.use?.('downloads') || null; }catch(e){ dl=null; } dlReady=true; if(current==='library') library(); if(openDoc) showDoc(openDoc,true); })();
+
+// ---------- DRAWER
+let openDoc = null, lastFocus = null;
+function showDoc(no, keep){
+  const a = BY[no]; if(!a) return;
+  openDoc = no; if(!keep) lastFocus = document.activeElement;
+  const files = FILES.list.filter(f=>f.no===no);
+  const d = $('#drawer');
+  d.innerHTML = `<div class="dhead"><div class="row"><span class="eyebrow" style="color:#7FD3CF">Artefact ${a.no} · ${a.domains.join(' · ')}</span><button type="button" class="x" id="dclose">Close</button></div>
+    <h2 id="dtitle">${esc(a.title)}</h2><span class="mono">${a.id} · ${a.ext} · ${esc(a.catName)}</span></div>
+  <div class="dbody">
+    <div class="dsec"><span class="eyebrow">Obligation</span>
+      <div class="tl">${['Low','Medium','High'].map(k=>`<span>${k}</span>${chip(a.tailor[k],k===cx)}`).join('<span class="muted">·</span>')}</div>
+      ${a.cond?`<p class="rule">${esc(a.cond)}</p>`:''}</div>
+    <div class="dsec"><span class="eyebrow">Lifecycle</span><dl class="kv">
+      <dt>Created</dt><dd>${esc(a.created)} focus area</dd><dt>Trigger</dt><dd>${esc(a.trigger)}</dd>
+      <dt>Gate</dt><dd><span class="mono">${a.gate}</span> ${esc((D.gates.find(g=>g.id===a.gate)||{}).name||'')}</dd>
+      <dt>Active in</dt><dd>${a.focus.map(f=>`<span class="dchip">${esc(f)}</span>`).join(' ')}</dd></dl></div>
+    <div class="dsec"><span class="eyebrow">Ownership</span><dl class="kv">
+      <dt>Owner</dt><dd>${esc(a.owner)}</dd><dt>Approver</dt><dd>${esc(a.approver)}</dd><dt>Consulted</dt><dd>${esc(a.consulted)}</dd></dl></div>
+    <div class="dsec"><span class="eyebrow">Baseline &amp; change control</span><dl class="kv">
+      <dt>Baselined</dt><dd>${esc(a.baseline)}</dd><dt>Update cadence</dt><dd>${esc(a.cadence)}</dd></dl>
+      <p class="rule">${esc(a.catRule)}</p></div>
+    <div class="dsec"><span class="eyebrow">Cross-references</span><dl class="kv">
+      <dt>Fed by</dt><dd><div class="refs">${a.fedBy.map(ref).join('')||'<span class="muted">Business case / project request</span>'}</div></dd>
+      <dt>Feeds</dt><dd><div class="refs">${a.feeds.map(ref).join('')||'<span class="muted">Organizational process assets</span>'}</div></dd></dl></div>
+    <div class="dsec"><span class="eyebrow">Objective acceptance criteria</span><ul class="checks">${a.accept.map(x=>`<li>${esc(x)}</li>`).join('')}</ul></div>
+    <div class="dsec"><span class="eyebrow">Template</span><div style="display:flex;gap:8px;flex-wrap:wrap">${files.map(f=>dlBtn(f,'Download .'+f.ext,'sm')).join('')}
+      <button type="button" class="btn sm ghost" data-flow="${a.no}" id="toflow">Show in information flow</button></div></div>
+  </div>`;
+  d.hidden=false; $('#scrim').hidden=false;
+  $('#dclose').addEventListener('click',closeDoc);
+  $('#toflow').addEventListener('click',()=>{ closeDoc(); location.hash='flow'; });
+  if(!keep) $('#dclose').focus();
+}
+function closeDoc(){
+  $('#drawer').hidden=true; $('#scrim').hidden=true; openDoc=null;
+  if(location.hash.startsWith('#doc-')) history.replaceState(null,'','#'+(current||'overview'));
+  if(lastFocus && lastFocus.focus) lastFocus.focus();
+}
+$('#scrim').addEventListener('click',closeDoc);
+document.addEventListener('keydown',e=>{ if(e.key==='Escape' && openDoc) closeDoc(); });
+document.addEventListener('click',e=>{
+  const t=e.target.closest('[data-doc]'); if(!t || e.target.closest('[data-save]')) return;
+  e.preventDefault(); location.hash='doc-'+t.dataset.doc;
+});
+
+// ---------- ROUTER
+const VIEWS = {overview, register, lifecycle, flow, controls, standards, library};
+let current = null;
+function renderAll(){ Object.keys(VIEWS).forEach(k=>{ if(k===current || k==='overview') VIEWS[k](); }); }
+function route(){
+  const h = (location.hash||'#overview').slice(1);
+  if(h.startsWith('doc-')){ if(!current) go('register'); showDoc(h.slice(4)); return; }
+  if(openDoc){ $('#drawer').hidden=true; $('#scrim').hidden=true; openDoc=null; }
+  go(VIEWS[h]? h : 'overview');
+}
+function go(v){
+  current = v;
+  Object.keys(VIEWS).forEach(k=>$('#v-'+k).hidden = k!==v);
+  document.querySelectorAll('#tabs a').forEach(a=>a.getAttribute('href')==='#'+v? a.setAttribute('aria-current','page') : a.removeAttribute('aria-current'));
+  VIEWS[v]();
+}
+window.addEventListener('hashchange',route);
+paintCx(); overview(); route();
+})();
+</script>
+
+</body>
+</html>
