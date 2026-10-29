@@ -51,7 +51,8 @@ elif args.base:
 else:
     out_html, base, external = args.out, "", False
 
-files = {"list": [], "data": {}, "base": base, "external": external}
+files = {"list": [], "data": {}, "base": base, "external": external,
+         "repo": "https://github.com/beatrizfigueiredo27-bot/PMO-Framework"}
 for name in sorted(os.listdir(args.toolkit_dir)):
     p = os.path.join(args.toolkit_dir, name)
     if not os.path.isfile(p) or name.split(".")[-1] not in ("docx", "xlsx", "pptx"):

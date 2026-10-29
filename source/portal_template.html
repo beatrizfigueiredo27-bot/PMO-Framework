@@ -516,7 +516,7 @@ function library(){
   $('#v-library').innerHTML = `
   <div class="head"><div class="eyebrow">Document library</div><h2>Download the controlled templates</h2>
   <p class="lead">Templates are grouped by primary performance domain. Each file opens with the shared cover, document-control table, revision history and approval block already in place.</p></div>
-  <div class="libtop"><span class="muted">${FILES.list.length} files · ${fmtSize(total)}</span>
+  <div class="libtop"><span class="muted">${FILES.list.length} files · ${fmtSize(total)}${FILES.repo?` · <a href="${FILES.repo}" target="_blank" rel="noopener">Source and version history on GitHub</a>`:''}</span>
     ${LINKS && FILES.zip ? dlBtn(FILES.zip,'Download complete toolkit (.zip)') : `<button type="button" class="btn" id="saveall" ${blocked()?'disabled':''}>Download complete toolkit (.zip)</button>`}</div>
   ${blocked()?'<p class="note">Downloads are not available in this view. Open this page in Claude to save the files.</p>':''}
   <div class="libgroup"><h3>Framework &amp; standards</h3><div class="libgrid">${gov.map(fileCard).join('')}</div></div>
