@@ -481,7 +481,7 @@ const LINKS = !!FILES.base;            // static hosting: plain download links
 const blocked = () => !LINKS && dlReady && !dl;
 const href = f => FILES.base + encodeURIComponent(f.path);
 function dlBtn(f, label, klass){
-  if(LINKS) return `<a class="btn ${klass||''}" href="${href(f)}" download="${esc(f.name)}" ${FILES.external?'target="_blank" rel="noopener"':''}>${label}</a>`;
+  if(LINKS) return `<a class="btn ${klass||''}" href="${href(f)}" ${FILES.external?'target="_blank" rel="noopener"':`download="${esc(f.name)}"`}>${label}</a>`;
   return `<button type="button" class="btn ${klass||''}" data-save="${esc(f.name)}" ${blocked()?'disabled':''}>${label}</button>`;
 }
 const fmtSize = n => n>1048576? (n/1048576).toFixed(1)+' MB' : Math.round(n/1024)+' KB';
